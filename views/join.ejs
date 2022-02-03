@@ -1,0 +1,225 @@
+<!doctype html>
+<html>
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+
+    <title>회원가입</title>
+
+
+    <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap" rel="stylesheet">
+
+    <style>
+        #header {
+            position: absolute;
+            left: 70%;
+            top: 8%;
+        }
+        #loginleft{
+            margin-right: 15px;
+        }
+        * {
+            font-family: 'Do Hyeon', sans-serif;
+        }
+
+        .wrap {
+            margin: 100px auto auto auto;
+            width: 500px;
+        }
+
+        #title {
+            text-align: center;
+            margin: 0px 0px 30px 0px;
+        }
+
+        p {
+            color: #a99f9f;
+            margin: 0 0 0 100px;
+        }
+
+        #first_mention {
+            font-size: 20px;
+            color: #00800070;
+        }
+
+        .title_wrap {
+            width: 500px;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+
+        .input1 {
+            margin: 0px 0px 35px 0px;
+        }
+
+        .email_text,
+        .pass1_text,
+        .pass2_text,
+        .nickname_text {
+            border: 1px solid lightgray;
+            border-radius: 5px 0px 0px 5px;
+            text-align: center;
+            padding: 10px;
+            background-color: rgb(0 123 255 / 11%);
+            width: 107px;
+            color: dodgerblue;
+        }
+
+        input,
+        select,
+        textarea {
+            width: 390px;
+            border: 1px solid lightgray;
+            border-radius: 0px 5px 5px 0px;
+            padding-left: 10px;
+        }
+
+        input:hover,
+        select:hover,
+        textarea:hover {
+            border: 2px solid #00adff;
+        }
+
+        input:focus,
+        select:focus,
+        textarea:focus {
+            outline: 2px solid #00adff;
+        }
+
+        .joinbtn {
+            width: 100px;
+        }
+
+        .cancelbtn {
+            width: 100px;
+            float: right;
+            color: white;
+            background-color: red;
+        }
+
+        .cancelbtn:hover {
+            background: #d80505;
+        }
+    </style>
+
+</head>
+
+<body class="is-preload">
+
+    <!-- Header -->
+    <a href='/'>
+        <div id="header"></div>
+    </a>
+
+    <!-- Main -->
+    <div class="wrap">
+        <div class="myitem"></div>
+        <div class="title_wrap">
+            <h1 id="title">회원가입</h1>
+            <p><span id="first_mention">나만의 블로그</span> 환영합니다</p>
+        </div>
+        <div class="order-box">
+            <div class="input1">
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="email_text" id="email_text">이메일</span>
+                    </div>
+                    <input id="email" type="text" class="email" aria-label="Default"
+                        aria-describedby="inputGroup-sizing-default" placeholder="email@email.com">
+                </div>
+            </div>
+            <div class="input1">
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="nickname_text" id="nickname_text">닉네임</span>
+                    </div>
+                    <input id="nickname" type="text" class="nickname" aria-label="Default"
+                        aria-describedby="inputGroup-sizing-default"
+                        placeholder="최소 3자 이상, 알파벳 대소문자(a~z, A~Z), 숫자(0~9)">
+                </div>
+            </div>
+            <div class="input1">
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="pass1_text" id="pass1_text">비밀번호</span>
+                    </div>
+                    <input id="password" type="password" class="pass1" aria-label="Default"
+                        aria-describedby="inputGroup-sizing-default" placeholder="최소 4자 이상입력해주세요">
+                </div>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="pass2_text" id="pass2_text">비밀번호 확인</span>
+                    </div>
+                    <input id="confirmPassword" type="password" class="pass2" aria-label="Default"
+                        aria-describedby="inputGroup-sizing-default" placeholder="비밀번호를 다시 입력해주세요">
+                </div>
+            </div>
+
+
+
+
+            <button onclick="sign_up()" type="submit" class="btn btn-primary joinbtn">회원가입</button>
+            <a href="/" type="cancel" class="btn cancelbtn">취소</a>
+        </div>
+
+        <!-- Scripts -->
+        <script src="/js/jquery.min.js"></script>
+        <script src="/api.js"></script>
+
+        <script>
+            if (localStorage.getItem("token")) {
+                getSelf(function () {
+                    alert("이미 로그인이 되어있습니다.");
+                    window.location.replace("/");
+                });
+            }
+            function sign_up() {
+                const nickname = $("#nickname").val();
+                const email = $("#email").val();
+                const password = $("#password").val();
+                const confirmPassword = $("#confirmPassword").val();
+
+                $.ajax({
+                    type: "POST",
+                    url: "/users",
+                    data: { 
+                        nickname: nickname, 
+                        email: email, 
+                        password: password, 
+                        confirmPassword: confirmPassword 
+                    },
+                    success: function (response) { // 성공하면
+                        alert("회원가입을 축하합니다.");
+                        console.log("join.ejs 회원가입완료");
+                        // window.location.reload()
+                        window.location.replace("/login");
+                    },
+                    error: function (error) {
+                        alert("회원가입실패 :" + error.responseJSON.errorMessage);
+                                                //라우터user.js의 post /users 에러메시지errorMessage
+                    },
+                });
+            }
+
+        </script>
+
+    </div>
+</body>
+
+</html>

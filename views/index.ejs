@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <!-- JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <!-- 구글폰트 -->
+    <link href="https://fonts.googleapis.com/css?family=Do+Hyeon&display=swap" rel="stylesheet">
+
+    <!-- Webpage Title -->
+    <title>블로그 | 메인</title>
+
+    <style>
+        #posts-body {
+            cursor: pointer;
+            background-color: rgb(255, 237, 213);
+        }
+
+        #header {
+            position: absolute;
+            left: 70%;
+            top: 8%;
+        }
+        #loginleft{
+            margin-right: 15px;
+        }
+        #main{
+            position: absolute;
+			left: 20%;
+			top: 21%;
+        }
+        #postlist_wrap {
+            margin: 20px 0 20px 0px;
+        }
+        #postbutton {
+            position: absolute;
+            top: 5%;
+            right: 50%;
+        }
+        #tableNo, #tableTitle, #tableWriter, #tableDate{
+            width: 13em;
+            height: 3em;
+        }
+        td{
+            padding: 5px;
+            font-size: 20px;
+        }
+    </style>
+
+
+</head>
+
+<body class="is-preload">
+
+    <!-- Header -->
+    <a href='/'>
+        <!-- 회원가입 로그인 -->
+        <div id="header"></div>
+    </a>
+
+    <!-- Main -->
+    <div id="main">
+        <div class="box alt container">
+            <section>
+                <header>
+                    <h3>전체 게시글</h3>
+                </header>
+                <div class="table-wrapper" id="postlist_wrap">
+                    <table class="default" >
+                        <thead>
+                            <tr>
+                                <th id="tableNo">No.</th>
+                                <th id="tableTitle">제목</th>
+                                <th id="tableWriter">작성자</th>
+                                <th id="tableDate">날짜</th>
+                            </tr>
+                        </thead>
+                        <tbody id='posts-body'>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+            <a href="/post" class="button" id="postbutton">글쓰기</a> <!-- post.ejs연결 -->
+        </div>
+    </div>
+
+
+    <!-- Scripts -->
+    <script src="/js/jquery.min.js"></script>
+    <script src="/api.js"></script>
+
+    <script>
+        var	$window = $(window), $body = $('body');
+        $window.on('load', function() {
+         showPosts() 
+			window.setTimeout(function() {
+				$body.removeClass('is-preload');
+			}, 100);
+
+             //token이 있으면 로그아웃 보여주고, 없으면 로그인,회원가입 보여주기.
+			if (localStorage.getItem("token")) {
+				$('#header').append(`<button onclick="logout()">로그아웃</button>`)
+			}else{
+				$('#header').append(`<a href="/login" id="loginleft">로그인</a>
+				<a href="/join" id="joinright">회원가입</a>`)
+			}
+    });
+
+
+        function showPosts(){
+	$.ajax({
+		type: "GET",
+		url: `/api/post`,
+		data: {},
+		success: function(response) {
+			let posts = response["post"]; //"post"는 라우터 post.js에서 전체리스트보기 db에서 리스트 내림차순으로 가져온 post
+			for (let i = 0; i < posts.length; i++) {    //게시글 클릭시 게시글보기게시판 detail.ejs이동 
+			$('#posts-body').append(`
+			<tr onclick="window.location='/detail?postId=${posts[i]['postId']}';">  
+				<td>${posts[i]['postId']}</td>
+				<td>${posts[i]['title']}</td>
+				<td>${posts[i]['writer']}</td>
+				<td>${posts[i]['date']}</td>
+			</tr>`)
+			}
+		}
+	});
+}
+
+function logout() {
+    localStorage.clear();
+    window.location.href = "/";
+  }
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <!-- JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <!-- 구글폰트 -->
+    <link href="https://fonts.googleapis.com/css?family=Do+Hyeon&display=swap" rel="stylesheet">
+
+    <!-- Webpage Title -->
+    <title>login</title>
+
+    <style>
+        #header {
+            position: absolute;
+            left: 70%;
+            top: 8%;
+        }
+        #loginleft{
+            margin-right: 15px;
+        }
+        .loginform_wrap {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            width: 500px;
+            height: 480px;
+            padding: 30px;
+            text-align: center;
+            /*border: 1px solid lightgray;*/
+        }
+
+        #title {
+            text-align: center;
+            margin: auto 0px 30px auto;
+        }
+
+        #text_email {
+            position: absolute;
+            left: 70px;
+            top: 85px;
+            background: white;
+            padding-left: 3px;
+            padding-right: 3px;
+        }
+
+        #text_pass {
+            position: absolute;
+            left: 70px;
+            top: 165px;
+            background: white;
+            padding-left: 3px;
+            padding-right: 3px;
+        }
+
+        #email,
+        #password {
+            width: 400px;
+            height: 50px;
+            margin: 5px 0 25px 0;
+            padding-left: 10px;
+            border-radius: 5px;
+            border: 1px solid #9bc9ff;
+            background-color: #0c7dff2e;
+        }
+
+        #email:focus,
+        #password:focus {
+            outline: 1px solid mediumblue;
+        }
+
+        #login_btn {
+            position: absolute;
+            top: 63%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 400px;
+            height: 35px;
+            border-radius: 5px;
+            border: 1px solid #9bc9ff;
+            background-color: #0065daf7;
+            color: white;
+        }
+        #loginIndex_btn {
+            position: absolute;
+            top: 67%;   
+            left: 10%;
+        }
+
+        #join_btn:focus {
+            outline: none;
+            box-shadow: none;
+        }
+
+        #join_btn:active {
+            font-size: large;
+            font-weight: bold;
+        }
+
+        #join_btn {
+            position: absolute;
+            top: 67%;
+            right: 50px;
+            height: 32px;
+            color: #0065daf7;
+            background-color: white;
+            border: 0px;
+        }
+    </style>
+    <script src="https://code.jquery.com/jquery-3.5.1.js"
+        integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+    <script src="/api.js"></script>
+    <script>
+        if (localStorage.getItem("token")) {
+            getSelf(function () {
+                alert("이미 로그인이 되어있습니다.");
+                window.location.replace("/");
+            });
+        }
+
+        function login() {
+            $.ajax({
+                type: "POST",
+                url: `/auth`,
+                data: { 
+                    password: $('#password').val(), 
+                    email: $('#email').val() 
+                },
+                success: function (response) {
+                    localStorage.setItem("token", response.token);
+                    window.location.replace("/");
+                },
+                error: function (error) {
+                    alert(error.responseJSON.errorMessage);
+                },
+            });
+        }
+
+    </script>
+
+
+
+</head>
+
+<body class="is-preload">
+
+<!-- Header -->
+<a href='/'>
+    <div id="header"></div>
+</a>
+
+    <div class="loginform_wrap"> 
+        <div id="title">
+            <h3>로그인</h3>
+        </div>
+        <div id="login_wrap">
+            <span id="text_email">이메일 입력</span>
+            <input id="email" placeholder="이메일 입력" name="email">
+        </div>
+        <div id="pass_wrap">
+            <span id="text_pass">비밀번호 입력</span>
+            <input id="password" type="password" placeholder="비밀번호 입력" name="pass">
+        </div>
+        <button onclick="login()" id="login_btn" type="button">로그인</button>
+        <a href="/join" id="join_btn" type="button">회원가입</a> <!-- join.ejs 연결 -->
+        <a href="/" id="loginIndex_btn" type="button">로그인 없이 게시판 목록 보기</a> <!-- join.ejs 연결 -->
+
+
+        <!-- Scripts  -->
+        <script src="/js/jquery.min.js"></script>
+    </div>
+</body>
+</html>

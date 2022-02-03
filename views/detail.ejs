@@ -1,0 +1,177 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <title>게시글 보기</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+
+    <style>
+        #header {
+            position: absolute;
+            left: 70%;
+            top: 8%;
+        }
+        #loginleft{
+            margin-right: 15px;
+        }
+        #main {
+            position: absolute;
+            left: 32%;
+            top: 13%;
+            padding-bottom: 20%;
+        }
+
+        #title,
+        #writer,
+        #content,
+        #password,
+        #date,
+        #commentContent {
+            width: 330%;
+            height: 10px;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+        #content {
+            height: 170px;
+            margin-bottom: 50px;
+        }
+        #commentContent {
+            height: 20px;
+        }
+        .cancelbutton{
+            position: absolute;
+            bottom: 94%;
+            right: -237%;
+        }
+        #mod {
+            position: absolute;
+            top: 2%;
+            left:240%;
+            background-color: #ff4403;
+            color: white;
+            border: 1px solid #ff5722;
+            width: 30%;
+            height: 3%; 
+        }
+        #del {
+            position: absolute;
+            top: 2%;
+            left: 190%;
+            background-color: #0c9fff;
+            color: white;
+            border: 1px solid lightblue;
+            width: 30%;
+            height: 3%;
+        }
+        #mod:hover{
+            border: 2px solid #9e3f00;
+        }
+        #del:hover{
+            border: 2px solid #025379;
+        }
+        #mod:focus{
+            border: 2px solid #9e3f00;
+        }
+        #del:focus{
+            border: 2px solid #025379;
+        }
+        .be-comment{
+            margin: 30px 0px 30px 0px;
+            border-bottom: 1px solid black;
+        }
+        #comment_modicancel {
+            display:flex;
+            float:right;
+        }
+        ol,ul{
+            list-style: none;
+        }
+        .be-comment > #modCom2 {
+            position: absolute;
+            top: 49%;
+            right: -27%;
+        }
+        .be-comment > #delCom2 {
+            position: absolute;
+            top: 49%;
+            right: -47%;
+        }
+
+
+    </style>
+
+</head>
+
+<body class="is-preload">
+
+    <!-- Header -->
+    <a href='/'>
+        <div id="header"></div>
+    </a>
+
+    <!-- Main -->
+    <div id="main">
+        <div class="box alt container">
+            <section>
+                <div id="mod-form">
+                    <div class="row" id="detail_wrap">
+                        <h1>게시글 상세 조회</h1>
+                        <div class="col-12">
+                            <input type="text" name="title" id="title" disabled />
+                        </div>
+                        <div class="col-6 col-12-mobilep">
+                            <input type="text" name="writer" id="writer" disabled />
+                        </div>
+                        <div class="col-6 col-12-mobilep">
+                            <input type="password" name="password" id="password" placeholder="비밀번호" disabled />
+                        </div>
+                        <div class="col-12">
+                            <input type="text" name="date" id="date"  disabled />
+                        </div>
+                        <div class="col-12">
+                            <textarea name="content" id="content" rows="6"  disabled></textarea>
+                        </div>
+                        <input type='hidden' id="postId" />
+                        <div class="col-12">
+                            <ul class="actions special" id="ifmine">
+                            </ul>
+                        </div>
+                    </div>
+								<a href="/" class="cancelbutton">취소</a> <!-- index.ejs연결 -->
+
+                </div>
+            </section>
+            <section>
+                <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"
+                    rel="stylesheet">
+                <div class="container">
+                    <div class="be-comment-block" id="comment-block">
+                        <h1 class="comments-title">Comment </h1>
+                        <form>
+                            <input type="hidden" id="commentPostId" name="postId" />
+                            <div class="col-xs-12">
+                                <div class="form-group">
+                                    <textarea class="form-input" id="commentContent" onclick="checkLogin()" required
+                                        placeholder="댓글을 등록하세요"></textarea>
+                                </div>
+                            </div>
+                            <button onclick="postComment()">submit</button>
+                        </form>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/detail.js"></script>
+    <script src="/api.js"></script>
+    <script>
+
+    </script>
+</body>
+
+</html>
